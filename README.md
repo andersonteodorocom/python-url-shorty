@@ -1,80 +1,8 @@
-# 🔗 URL Shortener / Encurtador de URL
+# 🔗 Encurtador de URL / URL Shortener
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com)
-
----
-
-## 🇺🇸 English
-
-A simple URL shortener developed in Python with Flask and SQLite, including access counter and detailed statistics.
-
-### Features
-
-- ✅ URL shortening
-- ✅ Local SQLite database
-- ✅ Access/click counter
-- ✅ Access history with IP and User-Agent
-- ✅ Simple and responsive web interface
-- ✅ Detailed statistics
-- ✅ List of all shortened URLs
-
-### Installation
-
-1. Clone or download this project
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-### Usage
-
-1. Run the application:
-```bash
-python app.py
-```
-
-2. Open your browser and access: `http://localhost:5000`
-
-3. Enter the URL you want to shorten and click "Shorten URL"
-
-4. Use the generated short URL - it will redirect to the original URL
-
-5. Access `/stats/<code>` to see statistics for a specific URL
-
-6. Access `/list` to see all shortened URLs
-
-### Database Structure
-
-#### `urls` Table
-- `id`: Primary key
-- `original_url`: Original URL
-- `short_code`: Generated short code
-- `created_at`: Creation date
-- `click_count`: Access counter
-
-#### `access_logs` Table
-- `id`: Primary key
-- `url_id`: Reference to urls table
-- `ip_address`: IP of the user who accessed
-- `user_agent`: Browser used
-- `accessed_at`: Access date and time
-
-### Technologies Used
-
-- **Python 3.x**
-- **Flask** - Web framework
-- **SQLite** - Local database
-- **HTML/CSS/JavaScript** - Frontend interface
-
-### Technical Features
-
-- Local SQLite database (no database server needed)
-- 6-character short codes (letters and numbers)
-- Mobile responsive interface
-- Complete logging system
-- URL validation
 
 ---
 
@@ -147,6 +75,78 @@ python app.py
 - Interface responsiva para mobile
 - Sistema de logs completo
 - Validação de URLs
+
+---
+
+## 🇺🇸 English
+
+A simple URL shortener developed in Python with Flask and SQLite, including access counter and detailed statistics.
+
+### Features
+
+- ✅ URL shortening
+- ✅ Local SQLite database
+- ✅ Access/click counter
+- ✅ Access history with IP and User-Agent
+- ✅ Simple and responsive web interface
+- ✅ Detailed statistics
+- ✅ List of all shortened URLs
+
+### Installation
+
+1. Clone or download this project
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### Usage
+
+1. Run the application:
+```bash
+python app.py
+```
+
+2. Open your browser and access: `http://localhost:5000`
+
+3. Enter the URL you want to shorten and click "Shorten URL"
+
+4. Use the generated short URL - it will redirect to the original URL
+
+5. Access `/stats/<code>` to see statistics for a specific URL
+
+6. Access `/list` to see all shortened URLs
+
+### Database Structure
+
+#### `urls` Table
+- `id`: Primary key
+- `original_url`: Original URL
+- `short_code`: Generated short code
+- `created_at`: Creation date
+- `click_count`: Access counter
+
+#### `access_logs` Table
+- `id`: Primary key
+- `url_id`: Reference to urls table
+- `ip_address`: IP of the user who accessed
+- `user_agent`: Browser used
+- `accessed_at`: Access date and time
+
+### Technologies Used
+
+- **Python 3.x**
+- **Flask** - Web framework
+- **SQLite** - Local database
+- **HTML/CSS/JavaScript** - Frontend interface
+
+### Technical Features
+
+- Local SQLite database (no database server needed)
+- 6-character short codes (letters and numbers)
+- Mobile responsive interface
+- Complete logging system
+- URL validation
 
 ---
 
