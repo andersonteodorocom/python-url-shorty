@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de URLs{% endblock %}
+
+{% block content %}
+<div class="url-list">
+    <h2>Todas as URLs Encurtadas</h2>
+    
+    {% if urls %}
+    <table>
+        <thead>
+            <tr>
+                <th>URL Original</th>
+                <th>Código Curto</th>
+                <th>URL Encurtada</th>
+                <th>Criada em</th>
+                <th>Acessos</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urls %}
+            <tr>
+                <td>
+                    <a href="{{ url.original_url }}" target="_blank" title="{{ url.original_url }}">
+                        {{ url.original_url[:50] }}{% if url.original_url|length > 50 %}...{% endif %}
+                    </a>
+                </td>
+                <td><code>{{ url.short_code }}</code></td>
+                <td>
+                    <a href="{{ request.url_root }}{{ url.short_code }}" target="_blank">
+                        {{ request.url_root }}{{ url.short_code }}
+                    </a>
+                </td>
+                <td>{{ url.created_at }}</td>
+                <td class="click-count">{{ url.click_count }}</td>
+                <td>
+                    <a href="{{ url_for('url_stats', short_code=url.short_code) }}" class="btn-small">Estatísticas</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhuma URL encurtada ainda. <a href="{{ url_for('index') }}">Encurte sua primeira URL!</a></p>
+    {% endif %}
+</div>
+{% endblock %}

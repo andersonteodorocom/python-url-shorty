@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="url-shortener">
+    <h2>Encurtar URL</h2>
+    <form id="shortenForm">
+        <div class="form-group">
+            <label for="url">Digite a URL que deseja encurtar:</label>
+            <input type="url" id="url" name="url" placeholder="https://exemplo.com" required>
+        </div>
+        <button type="submit">Encurtar URL</button>
+    </form>
+    
+    <div id="result" class="result" style="display: none;">
+        <h3>URL Encurtada:</h3>
+        <div class="url-result">
+            <input type="text" id="shortUrl" readonly>
+            <button onclick="copyToClipboard()">Copiar</button>
+        </div>
+        <div class="url-info">
+            <p><strong>URL Original:</strong> <span id="originalUrl"></span></p>
+            <p><a href="#" id="statsLink" target="_blank">Ver Estatísticas</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('shortenForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const url = document.getElementById('url').value;
+    const resultDiv = document.getElementById('result');
+    
+    try {
+        const response = await fetch('/shorten', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'url=' + encodeURIComponent(url)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            document.getElementById('shortUrl').value = data.short_url;
+            document.getElementById('originalUrl').textContent = data.original_url;
+            document.getElementById('statsLink').href = '/stats/' + data.short_url.split('/').pop();
+            resultDiv.style.display = 'block';
+        } else {
+            alert('Erro: ' + data.error);
+        }
+    } catch (error) {
+        alert('Erro ao encurtar URL: ' + error.message);
+    }
+});
+
+function copyToClipboard() {
+    const shortUrl = document.getElementById('shortUrl');
+    shortUrl.select();
+    document.execCommand('copy');
+    alert('URL copiada para a área de transferência!');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Estatísticas - {{ url_data.short_code }}{% endblock %}
+
+{% block content %}
+<div class="stats">
+    <h2>Estatísticas da URL</h2>
+    
+    <div class="url-info">
+        <h3>Informações da URL</h3>
+        <p><strong>URL Original:</strong> <a href="{{ url_data.original_url }}" target="_blank">{{ url_data.original_url }}</a></p>
+        <p><strong>Código Curto:</strong> {{ url_data.short_code }}</p>
+        <p><strong>URL Encurtada:</strong> <a href="{{ request.url_root }}{{ url_data.short_code }}" target="_blank">{{ request.url_root }}{{ url_data.short_code }}</a></p>
+        <p><strong>Criada em:</strong> {{ url_data.created_at }}</p>
+        <p><strong>Total de Acessos:</strong> <span class="click-count">{{ url_data.click_count }}</span></p>
+    </div>
+    
+    {% if recent_accesses %}
+    <div class="recent-accesses">
+        <h3>Últimos Acessos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>IP</th>
+                    <th>Navegador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for access in recent_accesses %}
+                <tr>
+                    <td>{{ access.accessed_at }}</td>
+                    <td>{{ access.ip_address }}</td>
+                    <td>{{ access.user_agent[:50] }}{% if access.user_agent|length > 50 %}...{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>Nenhum acesso registrado ainda.</p>
+    {% endif %}
+    
+    <div class="actions">
+        <a href="{{ url_for('index') }}" class="btn">Encurtar Nova URL</a>
+        <a href="{{ url_for('list_urls') }}" class="btn">Ver Todas as URLs</a>
+    </div>
+</div>
+{% endblock %}
