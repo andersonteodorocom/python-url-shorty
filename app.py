@@ -8,7 +8,10 @@ import os
 app = Flask(__name__)
 
 # Configuração do banco de dados
-DATABASE = 'url_shortener.db'
+import os
+DATABASE_DIR = os.environ.get('DATABASE_DIR', '.')
+os.makedirs(DATABASE_DIR, exist_ok=True)
+DATABASE = os.path.join(DATABASE_DIR, 'url_shortener.db')
 
 def init_db():
     """Inicializa o banco de dados SQLite"""
