@@ -1,4 +1,4 @@
-# 🚀 Pipeline CI/CD - URL Shortener
+ # Pipeline CI/CD - URL Shortener
 
 ## Visão Geral
 
@@ -8,7 +8,7 @@ Este pipeline automatiza o processo de build, teste e deploy da aplicação URL 
 
 O pipeline possui **6 steps principais**:
 
-### 1. 🧪 **Testes e Qualidade** (Step 1)
+### 1. **Testes e Qualidade** (Step 1)
 - **Checkout do código**
 - **Setup do ambiente Python 3.11**
 - **Cache das dependências** para acelerar builds
@@ -18,7 +18,7 @@ O pipeline possui **6 steps principais**:
 - **Execução dos testes unitários**
 - **Teste básico de inicialização**
 
-### 2. 🐳 **Build Docker** (Step 2)
+### 2. **Build Docker** (Step 2)
 - **Setup do Docker Buildx**
 - **Login no Docker Hub**
 - **Build multi-arquitetura** (amd64/arm64)
@@ -26,25 +26,25 @@ O pipeline possui **6 steps principais**:
 - **Cache otimizado** para builds mais rápidos
 - **Teste da imagem Docker**
 
-### 3. 🔒 **Análise de Segurança** (Step 3)
+### 3. **Análise de Segurança** (Step 3)
 - **Scan de vulnerabilidades com Trivy**
 - **Análise do filesystem**
 - **Upload dos resultados** para GitHub Security
 - **Relatórios SARIF**
 
-### 4. 🚀 **Deploy Staging** (Step 4)
+### 4. **Deploy Staging** (Step 4)
 - **Deploy automático na branch develop**
 - **Ambiente protegido**
 - **Testes de fumaça**
 - **Validação pré-produção**
 
-### 5. 🌟 **Deploy Produção** (Step 5)
+### 5. **Deploy Produção** (Step 5)
 - **Deploy automático na branch main**
 - **Ambiente protegido**
 - **Verificação pós-deploy**
 - **Monitoramento da aplicação**
 
-### 6. 📢 **Notificações** (Step 6)
+### 6. **Notificações** (Step 6)
 - **Notificações de sucesso**
 - **Alertas de falha**
 - **Relatórios de status**

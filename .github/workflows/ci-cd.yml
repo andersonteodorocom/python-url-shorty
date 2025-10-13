@@ -13,7 +13,7 @@ env:
 jobs:
   # Step 1: Testes e Validação
   test:
-    name: 🧪 Testes e Qualidade
+    name: Testes e Qualidade
     runs-on: ubuntu-latest
     
     steps:
@@ -54,11 +54,11 @@ jobs:
         
     - name: Teste básico de inicialização
       run: |
-        python -c "import app; print('✅ App inicializa corretamente')"
+        python -c "import app; print('App inicializa corretamente')"
 
   # Step 2: Build da imagem Docker
   build:
-    name: 🐳 Build Docker
+    name: Build Docker
     runs-on: ubuntu-latest
     needs: test
     
@@ -97,7 +97,7 @@ jobs:
 
   # Step 3: Análise de Segurança
   security:
-    name: 🔒 Análise de Segurança
+    name: Análise de Segurança
     runs-on: ubuntu-latest
     needs: test
     
@@ -121,7 +121,7 @@ jobs:
 
   # Step 4: Deploy para Staging
   deploy-staging:
-    name: 🚀 Deploy Staging
+    name: Deploy Staging
     runs-on: ubuntu-latest
     needs: [test, build]
     if: github.ref == 'refs/heads/develop'
@@ -133,18 +133,18 @@ jobs:
       
     - name: Deploy para ambiente de Staging
       run: |
-        echo "🚀 Fazendo deploy para STAGING..."
+        echo "Fazendo deploy para STAGING..."
         echo "URL: https://staging-url-shortener.exemplo.com"
         echo "Docker Image: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}"
         
     - name: Testes de fumaça no Staging
       run: |
-        echo "🧪 Executando testes de fumaça..."
-        echo "✅ Aplicação respondendo corretamente"
+        echo "Executando testes de fumaça..."
+        echo "Aplicação respondendo corretamente"
 
   # Step 5: Deploy para Produção
   deploy-production:
-    name: 🌟 Deploy Produção
+    name: Deploy Produção
     runs-on: ubuntu-latest
     needs: [test, build, security]
     if: github.ref == 'refs/heads/main'
@@ -156,18 +156,18 @@ jobs:
       
     - name: Deploy para Produção
       run: |
-        echo "🌟 Fazendo deploy para PRODUÇÃO..."
+        echo "Fazendo deploy para PRODUÇÃO..."
         echo "URL: https://url-shortener.exemplo.com"
         echo "Docker Image: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}"
         
     - name: Verificação pós-deploy
       run: |
-        echo "✅ Deploy realizado com sucesso!"
-        echo "📊 Aplicação disponível em produção"
+        echo "Deploy realizado com sucesso!"
+        echo "Aplicação disponível em produção"
 
   # Step 6: Notificações
   notify:
-    name: 📢 Notificações
+    name: Notificações
     runs-on: ubuntu-latest
     needs: [deploy-production]
     if: always()
@@ -176,11 +176,11 @@ jobs:
     - name: Notificar sucesso
       if: needs.deploy-production.result == 'success'
       run: |
-        echo "✅ Pipeline executada com sucesso!"
-        echo "🚀 Aplicação deployada em produção"
+        echo "Pipeline executada com sucesso!"
+        echo "Aplicação deployada em produção"
         
     - name: Notificar falha
       if: needs.deploy-production.result == 'failure'
       run: |
-        echo "❌ Pipeline falhou!"
-        echo "🔧 Verificar logs para mais detalhes"
+        echo "Pipeline falhou!"
+        echo "Verificar logs para mais detalhes"

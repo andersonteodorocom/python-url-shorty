@@ -1,4 +1,4 @@
-# 🚀 Script de Desenvolvimento - URL Shortener (PowerShell)
+# Script de Desenvolvimento - URL Shortener (PowerShell)
 # Este script facilita o desenvolvimento e testes locais no Windows
 
 param(
@@ -18,7 +18,7 @@ function Write-ColorOutput([ConsoleColor]$ForegroundColor) {
 }
 
 function Show-Header {
-    Write-ColorOutput Blue "🚀 URL Shortener - Script de Desenvolvimento"
+    Write-ColorOutput Blue "URL Shortener - Script de Desenvolvimento"
     Write-Output "=============================================="
 }
 
@@ -39,10 +39,10 @@ function Show-Help {
 }
 
 function Install-Dependencies {
-    Write-ColorOutput Yellow "📦 Instalando dependências..."
+    Write-ColorOutput Yellow "Instalando dependências..."
     python -m pip install --upgrade pip
     pip install -r requirements.txt
-    Write-ColorOutput Green "✅ Dependências instaladas!"
+    Write-ColorOutput Green "Dependências instaladas!"
 }
 
 function Run-Tests {

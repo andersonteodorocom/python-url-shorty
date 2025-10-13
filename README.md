@@ -167,11 +167,11 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 ## 🤝 Contributing / Contribuindo
 
-## 🚀 Pipeline CI/CD
+## Pipeline CI/CD
 
 Este projeto inclui um pipeline completo de CI/CD com **6 steps** automatizados:
 
-### ⚡ Execução Rápida Local
+### Execução Rápida Local
 
 **Windows (PowerShell):**
 ```powershell
@@ -187,16 +187,16 @@ Este projeto inclui um pipeline completo de CI/CD com **6 steps** automatizados:
 ./dev.sh run    # Executar aplicação
 ```
 
-### 🏗️ Steps do Pipeline
+### Steps do Pipeline
 
-1. **🧪 Testes e Qualidade** - Testes unitários, análise de código, verificação de segurança
-2. **🐳 Build Docker** - Build multi-arquitetura e push para registry
-3. **🔒 Análise de Segurança** - Scan de vulnerabilidades com Trivy
-4. **🚀 Deploy Staging** - Deploy automático na branch develop
-5. **🌟 Deploy Produção** - Deploy automático na branch main  
-6. **📢 Notificações** - Alertas de sucesso/falha
+1. **Testes e Qualidade** - Testes unitários, análise de código, verificação de segurança
+2. **Build Docker** - Build multi-arquitetura e push para registry
+3. **Análise de Segurança** - Scan de vulnerabilidades com Trivy
+4. **Deploy Staging** - Deploy automático na branch develop
+5. **Deploy Produção** - Deploy automático na branch main  
+6. **Notificações** - Alertas de sucesso/falha
 
-📋 **Documentação completa**: [PIPELINE.md](PIPELINE.md)
+**Documentação completa**: [PIPELINE.md](PIPELINE.md)
 
 ## 🤝 Contributing / Contribuindo
 

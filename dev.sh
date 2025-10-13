@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🚀 Script de Desenvolvimento - URL Shortener
+# Script de Desenvolvimento - URL Shortener
 # Este script facilita o desenvolvimento e testes locais
 
 set -e
@@ -11,7 +11,7 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🚀 URL Shortener - Script de Desenvolvimento${NC}"
+echo -e "${BLUE}URL Shortener - Script de Desenvolvimento${NC}"
 echo "=============================================="
 
 # Função para mostrar ajuda
@@ -33,32 +33,32 @@ show_help() {
 
 # Instalar dependências
 install_deps() {
-    echo -e "${YELLOW}📦 Instalando dependências...${NC}"
+    echo -e "${YELLOW}Instalando dependências...${NC}"
     pip install --upgrade pip
     pip install -r requirements.txt
-    echo -e "${GREEN}✅ Dependências instaladas!${NC}"
+    echo -e "${GREEN}Dependências instaladas!${NC}"
 }
 
 # Executar testes
 run_tests() {
-    echo -e "${YELLOW}🧪 Executando testes...${NC}"
+    echo -e "${YELLOW}Executando testes...${NC}"
     pytest -v --cov=app --cov-report=term-missing
-    echo -e "${GREEN}✅ Testes concluídos!${NC}"
+    echo -e "${GREEN}Testes concluídos!${NC}"
 }
 
 # Análise de código
 run_lint() {
-    echo -e "${YELLOW}🔍 Executando análise de código...${NC}"
+    echo -e "${YELLOW}Executando análise de código...${NC}"
     flake8 app.py --count --select=E9,F63,F7,F82 --show-source --statistics
     flake8 app.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    echo -e "${GREEN}✅ Análise de código concluída!${NC}"
+    echo -e "${GREEN}Análise de código concluída!${NC}"
 }
 
 # Verificação de segurança
 run_security() {
-    echo -e "${YELLOW}🔒 Verificando vulnerabilidades...${NC}"
+    echo -e "${YELLOW}Verificando vulnerabilidades...${NC}"
     safety check
-    echo -e "${GREEN}✅ Verificação de segurança concluída!${NC}"
+    echo -e "${GREEN}Verificação de segurança concluída!${NC}"
 }
 
 # Build Docker
