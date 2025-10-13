@@ -1,58 +1,239 @@
-# 🔗 Encurtador de URL / URL Shortener
+# Encurtador de URL - URL Shortener
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com)
+Um encurtador de URL desenvolvido em Python com Flask e SQLite, incluindo pipeline completo de CI/CD.
 
----
+## Contribuidores
 
-## 🇧🇷 Português
+- **Anderson Teodoro**
+- **Bruno Thobias**
+- **Jonathan Cunha**
+- **Marivaldo Lacerda**
+- **Murilo Nascimento**
+
+## Descrição
 
 Um encurtador de URL simples desenvolvido em Python com Flask e SQLite, incluindo contador de acessos e estatísticas detalhadas.
 
-### Funcionalidades
+## Funcionalidades
 
-- ✅ Encurtamento de URLs
-- ✅ Banco de dados SQLite local
-- ✅ Contador de acessos/cliques
-- ✅ Histórico de acessos com IP e User-Agent
-- ✅ Interface web simples e responsiva
-- ✅ Estatísticas detalhadas
-- ✅ Lista de todas as URLs encurtadas
+- Encurtamento de URLs
+- Banco de dados SQLite local
+- Contador de acessos/cliques
+- Histórico de acessos com IP e User-Agent
+- Interface web simples e responsiva
+- Estatísticas detalhadas
+- Lista de todas as URLs encurtadas
 
-### Instalação
+## Tecnologias Utilizadas
 
-1. Clone ou baixe este projeto
+- **Backend**: Python 3.11, Flask
+- **Banco de dados**: SQLite
+- **Frontend**: HTML, CSS, JavaScript
+- **Containerização**: Docker
+- **CI/CD**: GitHub Actions
+- **Testes**: pytest
+- **Análise de código**: flake8
+- **Segurança**: safety, Trivy
+
+## Instalação e Execução
+
+### Pré-requisitos
+- Python 3.11+
+- Docker (opcional)
+- Git
+
+### Instalação Local
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/andersonteodorocom/python-url-shorty.git
+cd python-url-shorty
+```
+
 2. Instale as dependências:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Como usar
-
-1. Execute o aplicativo:
+3. Execute a aplicação:
 ```bash
 python app.py
 ```
 
-2. Abra seu navegador e acesse: `http://localhost:5000`
+4. Acesse no navegador: `http://localhost:5000`
 
-3. Digite a URL que deseja encurtar e clique em "Encurtar URL"
+### Execução com Docker
 
-4. Use a URL encurtada gerada - ela redirecionará para a URL original
+1. Build da imagem:
+```bash
+docker build -t url-shortener .
+```
 
-5. Acesse `/stats/<codigo>` para ver estatísticas de uma URL específica
+2. Execute o container:
+```bash
+docker run -p 5000:5000 url-shortener
+```
 
-6. Acesse `/list` para ver todas as URLs encurtadas
+### Execução com Docker Compose
 
-### Estrutura do Banco de Dados
+```bash
+docker-compose up
+```
 
-#### Tabela `urls`
-- `id`: Chave primária
+## Como Usar
+
+1. Acesse a aplicação no navegador
+2. Digite a URL que deseja encurtar
+3. Clique em "Encurtar URL"
+4. Use a URL encurtada gerada
+5. Acesse `/list` para ver todas as URLs
+6. Acesse `/stats/<codigo>` para estatísticas
+
+## Pipeline CI/CD
+
+Este projeto implementa um pipeline completo de CI/CD com 6 etapas automatizadas:
+
+### Estrutura do Pipeline
+
+1. **Testes e Qualidade**
+   - Checkout do código
+   - Setup do ambiente Python 3.11
+   - Cache das dependências
+   - Instalação das dependências
+   - Análise de código com Flake8
+   - Verificação de segurança com Safety
+   - Execução dos testes unitários
+   - Teste básico de inicialização
+
+2. **Build Docker**
+   - Setup do Docker Buildx
+   - Login no Docker Hub
+   - Build multi-arquitetura (amd64/arm64)
+   - Push da imagem para o registry
+   - Cache otimizado para builds mais rápidos
+   - Teste da imagem Docker
+
+3. **Análise de Segurança**
+   - Scan de vulnerabilidades com Trivy
+   - Análise do filesystem
+   - Upload dos resultados para GitHub Security
+   - Relatórios SARIF
+
+4. **Deploy Staging**
+   - Deploy automático na branch develop
+   - Ambiente protegido
+   - Testes de fumaça
+   - Validação pré-produção
+
+5. **Deploy Produção**
+   - Deploy automático na branch main
+   - Ambiente protegido
+   - Verificação pós-deploy
+   - Monitoramento da aplicação
+
+6. **Notificações**
+   - Notificações de sucesso
+   - Alertas de falha
+   - Relatórios de status
+
+### Triggers
+
+O pipeline é executado automaticamente nos seguintes eventos:
+- Push nas branches `main` ou `develop`
+- Pull Request para a branch `main`
+
+### Desenvolvimento Local
+
+**Windows (PowerShell):**
+```powershell
+.\dev.ps1 ci    # Pipeline completa
+.\dev.ps1 test  # Apenas testes  
+.\dev.ps1 run   # Executar aplicação
+```
+
+**Linux/Mac:**
+```bash
+./dev.sh ci     # Pipeline completa
+./dev.sh test   # Apenas testes
+./dev.sh run    # Executar aplicação
+```
+
+## Testes
+
+O projeto inclui testes unitários abrangentes:
+
+```bash
+# Executar todos os testes
+pytest
+
+# Executar com cobertura
+pytest --cov=app
+
+# Executar testes específicos
+pytest tests/test_app.py -v
+```
+
+### Testes Implementados
+
+- Teste de carregamento da página inicial
+- Teste de encurtamento de URL
+- Teste de redirecionamento
+- Teste de URLs inválidas
+- Teste da página de listagem
+- Teste de estatísticas
+- Teste de geração de códigos
+- Teste de operações do banco de dados
+
+## Análise de Código
+
+```bash
+# Análise com flake8
+flake8 app.py
+
+# Verificação de segurança
+safety check
+```
+
+## Estrutura do Projeto
+
+```
+python-url-shorty/
+├── .do/
+│   └── app.yaml               # Configuração DigitalOcean
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml          # Pipeline CI/CD
+├── static/
+│   └── style.css              # Estilos CSS
+├── templates/
+│   ├── base.html              # Template base
+│   ├── index.html             # Página inicial
+│   ├── list.html              # Lista de URLs
+│   ├── stats.html             # Estatísticas
+│   └── error.html             # Página de erro
+├── tests/
+│   └── test_app.py            # Testes unitários
+├── app.py                     # Aplicação principal
+├── requirements.txt           # Dependências Python
+├── Dockerfile                 # Configuração Docker otimizada
+├── docker-compose.yml         # Orquestração Docker
+├── deploy.ps1                 # Script deploy automático
+├── dev.ps1                    # Script desenvolvimento (Windows)
+├── dev.sh                     # Script desenvolvimento (Linux/Mac)
+├── pytest.ini                # Configuração pytest
+├── .flake8                    # Configuração flake8
+├── .dockerignore              # Otimização Docker build
+└── README.md                  # Documentação completa
+```
+
+## Banco de Dados
+
+### Tabela `urls`
+- `id`: Identificador único
 - `original_url`: URL original
-- `short_code`: Código curto gerado
+- `short_code`: Código encurtado
 - `created_at`: Data de criação
-- `click_count`: Contador de acessos
+- `click_count`: Contador de cliques
 
 #### Tabela `access_logs`
 - `id`: Chave primária
@@ -61,12 +242,49 @@ python app.py
 - `user_agent`: Navegador usado
 - `accessed_at`: Data e hora do acesso
 
-### Tecnologias Utilizadas
+## Deploy em Produção
 
-- **Python 3.x**
-- **Flask** - Framework web
-- **SQLite** - Banco de dados local
-- **HTML/CSS/JavaScript** - Interface frontend
+### DigitalOcean App Platform (Recomendado)
+
+O projeto está otimizado para deploy no DigitalOcean App Platform:
+
+1. **Faça login no DigitalOcean**
+2. **App Platform** → Create App  
+3. **Conecte ao GitHub**: andersonteodorocom/python-url-shorty
+4. **Use o arquivo** `.do/app.yaml` (configuração automática)
+5. **Deploy automático** a cada push na branch main
+
+**Custo**: $5/mês (basic-xxs - 512MB RAM)
+
+### Script de Deploy
+
+```powershell
+# Windows
+.\deploy.ps1 push    # Testa e faz deploy automaticamente
+
+# Comandos individuais
+.\deploy.ps1 test    # Executa testes
+.\deploy.ps1 local   # Testa versão produção local
+.\deploy.ps1 build   # Testa build Docker
+```
+
+### Outras Plataformas Cloud
+
+O Dockerfile otimizado funciona em:
+- ✅ **Heroku**
+- ✅ **Railway** 
+- ✅ **Render**
+- ✅ **Google Cloud Run**
+- ✅ **AWS App Runner**
+
+### Configuração de Secrets (GitHub Actions)
+
+Para o pipeline funcionar completamente:
+
+1. Acesse: `Settings` → `Secrets and variables` → `Actions`
+2. Adicione os secrets:
+   - `DOCKER_HUB_USERNAME`: seu usuário do Docker Hub
+   - `DOCKER_HUB_ACCESS_TOKEN`: token de acesso do Docker Hub
 
 ### Características Técnicas
 
@@ -196,24 +414,43 @@ Este projeto inclui um pipeline completo de CI/CD com **6 steps** automatizados:
 5. **Deploy Produção** - Deploy automático na branch main  
 6. **Notificações** - Alertas de sucesso/falha
 
-**Documentação completa**: [PIPELINE.md](PIPELINE.md)
-
-## 🤝 Contributing / Contribuindo
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
 
 ### Development Workflow
 1. Fork o projeto
 2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
-3. Execute os testes: `.\dev.ps1 test` (Windows) ou `./dev.sh test` (Linux/Mac)
+3. Execute os testes: `pytest`
 4. Commit suas mudanças: `git commit -am 'Adiciona nova funcionalidade'`
 5. Push para a branch: `git push origin feature/nova-funcionalidade`
 6. Abra um Pull Request
 
-## 📞 Support / Suporte
+## Licença
 
-If you have any questions or need help, please open an issue.
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-Se você tiver alguma dúvida ou precisar de ajuda, abra uma issue.
+## Trabalho Acadêmico
+
+Este projeto foi desenvolvido como trabalho acadêmico demonstrando:
+
+- **Desenvolvimento de aplicação web** com interface funcional
+- **Implementação de pipeline CI/CD** com 6 etapas automatizadas
+- **Boas práticas de desenvolvimento** com testes e análise de código
+- **Containerização** com Docker
+- **Automação completa** de build, teste e deploy
+
+### Critérios Atendidos
+
+- ✅ Aplicação com interface web
+- ✅ Repositório Git funcional
+- ✅ Pipeline com mínimo 3 steps (implementado 6 steps)
+- ✅ Documentação completa
+- ✅ Testes automatizados
+- ✅ Análise de segurança
+
+**Pontuação**: 6 steps = 3 (base) + 3 × 0.5 (extras) = +1.5 pontos adicionais
+
+---
+
+**Desenvolvido pelo Grupo de Desenvolvimento**

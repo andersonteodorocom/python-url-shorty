@@ -1,0 +1,23 @@
+name: url-shortener
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: andersonteodorocom/python-url-shorty
+    branch: main
+  run_command: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app:app
+  environment_slug: python
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  http_port: 5000
+  envs:
+  - key: FLASK_ENV
+    value: production
+  - key: DATABASE_DIR
+    value: /app/data
+  - key: PYTHONUNBUFFERED
+    value: "1"
+  health_check:
+    http_path: /
+  routes:
+  - path: /
