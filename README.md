@@ -167,9 +167,50 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 ## 🤝 Contributing / Contribuindo
 
+## 🚀 Pipeline CI/CD
+
+Este projeto inclui um pipeline completo de CI/CD com **6 steps** automatizados:
+
+### ⚡ Execução Rápida Local
+
+**Windows (PowerShell):**
+```powershell
+.\dev.ps1 ci    # Pipeline completa
+.\dev.ps1 test  # Apenas testes
+.\dev.ps1 run   # Executar aplicação
+```
+
+**Linux/Mac:**
+```bash
+./dev.sh ci     # Pipeline completa
+./dev.sh test   # Apenas testes
+./dev.sh run    # Executar aplicação
+```
+
+### 🏗️ Steps do Pipeline
+
+1. **🧪 Testes e Qualidade** - Testes unitários, análise de código, verificação de segurança
+2. **🐳 Build Docker** - Build multi-arquitetura e push para registry
+3. **🔒 Análise de Segurança** - Scan de vulnerabilidades com Trivy
+4. **🚀 Deploy Staging** - Deploy automático na branch develop
+5. **🌟 Deploy Produção** - Deploy automático na branch main  
+6. **📢 Notificações** - Alertas de sucesso/falha
+
+📋 **Documentação completa**: [PIPELINE.md](PIPELINE.md)
+
+## 🤝 Contributing / Contribuindo
+
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
+
+### Development Workflow
+1. Fork o projeto
+2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
+3. Execute os testes: `.\dev.ps1 test` (Windows) ou `./dev.sh test` (Linux/Mac)
+4. Commit suas mudanças: `git commit -am 'Adiciona nova funcionalidade'`
+5. Push para a branch: `git push origin feature/nova-funcionalidade`
+6. Abra um Pull Request
 
 ## 📞 Support / Suporte
 

@@ -1,2 +1,8 @@
 Flask==2.3.3
 Werkzeug==2.3.7
+
+# Dependências de desenvolvimento e teste
+pytest==7.4.3
+pytest-cov==4.1.0
+flake8==6.1.0
+safety==2.3.5

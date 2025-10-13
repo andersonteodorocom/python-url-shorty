@@ -1,0 +1,19 @@
+[flake8]
+max-line-length = 127
+max-complexity = 10
+exclude = 
+    .git,
+    __pycache__,
+    .pytest_cache,
+    htmlcov,
+    venv,
+    env,
+    .venv,
+    .env
+
+ignore = 
+    E203,  # whitespace before ':'
+    W503,  # line break before binary operator
+
+per-file-ignores =
+    tests/*:F401,F811
